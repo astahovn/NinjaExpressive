@@ -19,10 +19,13 @@ class HomePageAction implements ServerMiddlewareInterface
 
     private $template;
 
-    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
+    private $posts;
+
+    public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null, $posts)
     {
         $this->router   = $router;
         $this->template = $template;
+        $this->posts = $posts;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
@@ -57,6 +60,7 @@ class HomePageAction implements ServerMiddlewareInterface
             $data['templateName'] = 'Zend View';
             $data['templateDocs'] = 'https://docs.zendframework.com/zend-view/';
         }
+        $data['posts'] = $this->posts;
 
         return new HtmlResponse($this->template->render('app::home-page', $data));
     }
