@@ -5,7 +5,6 @@ namespace App\Action;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use App\Model\Post;
 
 class HomePageFactory
 {
@@ -16,7 +15,7 @@ class HomePageFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        $posts = (new Post($container->get('Zend\Db\Adapter\Adapter')))->fetchPosts();
+        $posts = $container->get('App\Model\Post')->fetchPosts();
 
         return new HomePageAction($router, $template, $posts);
     }
