@@ -15,7 +15,7 @@ class HomePageFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        $posts = $container->get('App\Model\Post')->fetchPosts();
+        $posts = $container->get('App\Model\Post')->fetchLast();
 
         return new HomePageAction($router, $template, $posts);
     }
