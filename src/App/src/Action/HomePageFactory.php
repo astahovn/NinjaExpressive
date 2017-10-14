@@ -3,20 +3,15 @@
 namespace App\Action;
 
 use Interop\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $router   = $container->get(RouterInterface::class);
-        $template = $container->has(TemplateRendererInterface::class)
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
-
+        $template = $container->get(TemplateRendererInterface::class);
         $posts = $container->get('App\Model\Post')->fetchLast();
 
-        return new HomePageAction($router, $template, $posts);
+        return new HomePageAction($template, $posts);
     }
 }
