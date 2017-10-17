@@ -27,4 +27,4 @@
  */
 
 $app->get('/', App\Action\HomePageAction::class, 'home');
-$app->get('/login', App\Action\LoginAction::class, 'login');
+$app->route('/login', App\Action\LoginAction::class, ['GET', 'POST'], 'login');

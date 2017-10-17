@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
+
 /**
  * The configuration provider for the App module
  *
@@ -36,6 +38,8 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+                AuthAdapter::class => AuthFactory::class,
+
                 Action\HomePageAction::class => Action\HomePageFactory::class,
                 Action\LoginAction::class => Action\LoginFactory::class,
 
