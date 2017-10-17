@@ -9,7 +9,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template;
 use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
-use Zend\Authentication\Result;
+use Zend\Authentication\AuthenticationService;
 
 class LoginAction implements ServerMiddlewareInterface
 {
@@ -25,6 +25,11 @@ class LoginAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        $auth = new AuthenticationService();
+        if ($auth->hasIdentity()) {
+            return new RedirectResponse('/');
+        }
+
         $method = $request->getMethod();
         if ('POST' === $method) {
             $params = $request->getParsedBody();
@@ -33,8 +38,8 @@ class LoginAction implements ServerMiddlewareInterface
                 ->setIdentity($params['login'])
                 ->setCredential($params['password']);
 
-            $result = $this->authAdapter->authenticate();
-            if ($result->getCode() == Result::SUCCESS) {
+            $result = $auth->authenticate($this->authAdapter);
+            if ($result->isValid()) {
                 return new RedirectResponse('/');
             }
         }

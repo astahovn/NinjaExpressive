@@ -36,6 +36,7 @@ class ConfigProvider
     {
         return [
             'invokables' => [
+                Action\LogoutAction::class => Action\LogoutAction::class,
             ],
             'factories'  => [
                 AuthAdapter::class => AuthFactory::class,

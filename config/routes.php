@@ -28,3 +28,4 @@
 
 $app->get('/', App\Action\HomePageAction::class, 'home');
 $app->route('/login', App\Action\LoginAction::class, ['GET', 'POST'], 'login');
+$app->get('/logout', App\Action\LogoutAction::class, 'logout');
