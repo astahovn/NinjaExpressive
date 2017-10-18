@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
+use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 
 /**
  * The configuration provider for the App module

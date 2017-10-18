@@ -8,7 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template;
-use Zend\Authentication\Adapter\DbTable\CredentialTreatmentAdapter as AuthAdapter;
+use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
 
 class LoginAction implements ServerMiddlewareInterface
