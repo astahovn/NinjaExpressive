@@ -31,19 +31,29 @@ class LoginAction implements ServerMiddlewareInterface
         }
 
         $method = $request->getMethod();
+        $params = $request->getParsedBody();
+        $error = false;
         if ('POST' === $method) {
-            $params = $request->getParsedBody();
+            $error = (empty($params['login']) || empty($params['password']));
 
-            $this->authAdapter
-                ->setIdentity($params['login'])
-                ->setCredential($params['password']);
+            if (!$error) {
+                $this->authAdapter
+                    ->setIdentity($params['login'])
+                    ->setCredential($params['password']);
 
-            $result = $auth->authenticate($this->authAdapter);
-            if ($result->isValid()) {
-                return new RedirectResponse('/');
+                $result = $auth->authenticate($this->authAdapter);
+                if ($result->isValid()) {
+                    return new RedirectResponse('/');
+                }
+                $error = true;
             }
         }
 
-        return new HtmlResponse($this->template->render('app::login-page'));
+        $tplData = [
+            'error' => $error,
+            'login' => $params['login'] ?? ''
+        ];
+
+        return new HtmlResponse($this->template->render('app::login-page', $tplData));
     }
 }
