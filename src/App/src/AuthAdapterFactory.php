@@ -6,7 +6,7 @@ use Interop\Container\ContainerInterface;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 
-class AuthFactory
+class AuthAdapterFactory
 {
     public function __invoke(ContainerInterface $container, $requestedName)
     {

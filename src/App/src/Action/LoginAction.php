@@ -7,7 +7,6 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterfa
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Authentication\AuthenticationService;
 use Interop\Container\ContainerInterface;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 
@@ -24,8 +23,7 @@ class LoginAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $auth = new AuthenticationService();
-        if ($auth->hasIdentity()) {
+        if ($this->auth->hasIdentity()) {
             return new RedirectResponse('/');
         }
 
@@ -40,7 +38,7 @@ class LoginAction extends BaseAction implements ServerMiddlewareInterface
                     ->setIdentity($params['login'])
                     ->setCredential($params['password']);
 
-                $result = $auth->authenticate($this->authAdapter);
+                $result = $this->auth->authenticate($this->authAdapter);
                 if ($result->isValid()) {
                     return new RedirectResponse('/');
                 }

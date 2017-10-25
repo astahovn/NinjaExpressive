@@ -3,6 +3,7 @@
 namespace App;
 
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
+use Zend\Authentication\AuthenticationService as AuthService;
 
 /**
  * The configuration provider for the App module
@@ -39,7 +40,8 @@ class ConfigProvider
                 Action\LogoutAction::class => Action\LogoutAction::class,
             ],
             'factories'  => [
-                AuthAdapter::class => AuthFactory::class,
+                AuthAdapter::class => AuthAdapterFactory::class,
+                AuthService::class => AuthServiceFactory::class,
 
                 Action\HomePageAction::class => Action\BaseFactory::class,
                 Action\LoginAction::class => Action\BaseFactory::class,
