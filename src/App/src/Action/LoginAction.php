@@ -7,20 +7,19 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterfa
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
-use Zend\Expressive\Template;
-use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
+use Interop\Container\ContainerInterface;
+use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 
-class LoginAction implements ServerMiddlewareInterface
+class LoginAction extends BaseAction implements ServerMiddlewareInterface
 {
-    private $template;
-
     private $authAdapter;
 
-    public function __construct(Template\TemplateRendererInterface $template = null, AuthAdapter $authAdapter)
+    public function __construct(ContainerInterface $container)
     {
-        $this->template = $template;
-        $this->authAdapter = $authAdapter;
+        parent::__construct($container);
+
+        $this->authAdapter = $container->get(CallbackCheckAdapter::class);
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)

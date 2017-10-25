@@ -41,8 +41,8 @@ class ConfigProvider
             'factories'  => [
                 AuthAdapter::class => AuthFactory::class,
 
-                Action\HomePageAction::class => Action\HomePageFactory::class,
-                Action\LoginAction::class => Action\LoginFactory::class,
+                Action\HomePageAction::class => Action\BaseFactory::class,
+                Action\LoginAction::class => Action\BaseFactory::class,
 
                 Model\Post::class => Model\ModelFactory::class,
             ],

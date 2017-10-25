@@ -6,18 +6,18 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template;
+use Interop\Container\ContainerInterface;
+use App\Model\Post;
 
-class HomePageAction implements ServerMiddlewareInterface
+class HomePageAction extends BaseAction implements ServerMiddlewareInterface
 {
-    private $template;
-
     private $posts;
 
-    public function __construct(Template\TemplateRendererInterface $template = null, $posts)
+    public function __construct(ContainerInterface $container)
     {
-        $this->template = $template;
-        $this->posts = $posts;
+        parent::__construct($container);
+
+        $this->posts = $container->get(Post::class)->fetchLast();
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
