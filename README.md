@@ -1,6 +1,9 @@
-# Zend Expressive tutorial blog project
+# Ninja
 
-## Current features
+Service for secure team work. 
+Tasks, comments and messaging - everything stored in a crypted way. 
 
-- Index page with latest posts.
-- Users authentication.
+## Programming stack
+
+* PHP 7
+* Zend Expressive
