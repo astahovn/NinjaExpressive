@@ -44,9 +44,11 @@ class ConfigProvider
                 AuthService::class => AuthServiceFactory::class,
 
                 Action\Index\IndexAction::class => Action\BaseFactory::class,
+                Action\Index\RegisterAction::class => Action\BaseFactory::class,
+
                 Action\Profile\IndexAction::class => Action\BaseFactory::class,
 
-                Model\Post::class => Model\ModelFactory::class,
+                Model\User::class => Model\ModelFactory::class,
             ],
         ];
     }

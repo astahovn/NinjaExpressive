@@ -27,5 +27,6 @@
  */
 
 $app->route('/', App\Action\Index\IndexAction::class, ['GET', 'POST'], 'login');
+$app->route('/register', App\Action\Index\RegisterAction::class, ['GET', 'POST'], 'register');
 $app->get('/profile', App\Action\Profile\IndexAction::class, 'home');
 $app->get('/logout', App\Action\LogoutAction::class, 'logout');
