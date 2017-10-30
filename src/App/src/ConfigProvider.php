@@ -43,8 +43,8 @@ class ConfigProvider
                 AuthAdapter::class => AuthAdapterFactory::class,
                 AuthService::class => AuthServiceFactory::class,
 
-                Action\HomePageAction::class => Action\BaseFactory::class,
-                Action\LoginAction::class => Action\BaseFactory::class,
+                Action\Index\IndexAction::class => Action\BaseFactory::class,
+                Action\Profile\IndexAction::class => Action\BaseFactory::class,
 
                 Model\Post::class => Model\ModelFactory::class,
             ],
@@ -60,7 +60,8 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'app'    => [__DIR__ . '/../templates/app'],
+                'app-index'    => [__DIR__ . '/../templates/app/index'],
+                'app-profile'    => [__DIR__ . '/../templates/app/profile'],
                 'error'  => [__DIR__ . '/../templates/error'],
                 'layout' => [__DIR__ . '/../templates/layout'],
             ],

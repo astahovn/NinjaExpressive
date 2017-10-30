@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Action;
+namespace App\Action\Index;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\RedirectResponse;
 use Interop\Container\ContainerInterface;
+use App\Action\BaseAction;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
+use Zend\Diactoros\Response\RedirectResponse;
+//use App\Model\Post;
 
-class LoginAction extends BaseAction implements ServerMiddlewareInterface
+class IndexAction extends BaseAction implements ServerMiddlewareInterface
 {
+    //private $posts;
     private $authAdapter;
 
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
 
+        //$this->posts = $container->get(Post::class)->fetchLast();
         $this->authAdapter = $container->get(CallbackCheckAdapter::class);
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if ($this->auth->hasIdentity()) {
-            return new RedirectResponse('/');
+            return new RedirectResponse('/profile');
         }
 
         $method = $request->getMethod();
@@ -51,6 +55,6 @@ class LoginAction extends BaseAction implements ServerMiddlewareInterface
             'login' => $params['login'] ?? ''
         ];
 
-        return new HtmlResponse($this->template->render('app::login-page', $tplData));
+        return new HtmlResponse($this->template->render('app-index::index-page', $tplData));
     }
 }

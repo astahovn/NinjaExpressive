@@ -17,6 +17,7 @@
         .app-content { flex: 1; }
         .app-footer { padding-bottom: 1em; }
         .zf-green, h2 a { color: #68b604; }
+        .form-auth { margin: 0 auto; width: 300px; margin-top: 50px; }
     </style>
     <?=$this->section('stylesheets')?>
 </head>
@@ -36,13 +37,9 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <?php if ($auth->hasIdentity()): ?>
+                    <?php if (isset($auth) && $auth->hasIdentity()): ?>
                     <li>
                         <a href="/logout">Logout <?= $auth->getIdentity() ?></a>
-                    </li>
-                    <?php else: ?>
-                    <li>
-                        <a href="/login">Login</a>
                     </li>
                     <?php endif; ?>
                 </ul>
@@ -63,9 +60,7 @@
         <?php if ($this->section('footer')): ?>
             <?=$this->section('footer')?>
         <?php else: ?>
-            <p>
-                &copy; 2005 - <?=date('Y')?> by Zend Technologies Ltd. All rights reserved.
-            </p>
+            <p>&copy; 2017 Ninja</p>
         <?php endif ?>
     </div>
 </footer>
