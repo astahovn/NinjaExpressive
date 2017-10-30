@@ -10,18 +10,15 @@ use Interop\Container\ContainerInterface;
 use App\Action\BaseAction;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter;
 use Zend\Diactoros\Response\RedirectResponse;
-//use App\Model\Post;
 
 class IndexAction extends BaseAction implements ServerMiddlewareInterface
 {
-    //private $posts;
     private $authAdapter;
 
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
 
-        //$this->posts = $container->get(Post::class)->fetchLast();
         $this->authAdapter = $container->get(CallbackCheckAdapter::class);
     }
 
