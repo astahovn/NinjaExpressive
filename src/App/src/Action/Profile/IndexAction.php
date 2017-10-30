@@ -20,6 +20,9 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
     {
 
         $tplData = [
+            'profile' => [
+                'nick' => $this->auth->getIdentity()
+            ]
         ];
 
         return new HtmlResponse($this->template->render('app-profile::index-page', $tplData));
