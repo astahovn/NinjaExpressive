@@ -46,4 +46,32 @@ class User extends Model
         return ($result->count() > 0);
     }
 
+    /**
+     * @param array $fields
+     * @param string $where
+     * @return \Zend\Db\Adapter\Driver\ResultInterface
+     */
+    public function update($fields, $where)
+    {
+        $sql = new Sql($this->db);
+        $update = $sql->update(self::TABLE_NAME);
+        $update->set($fields)->where($where);
+        $statement = $sql->prepareStatementForSqlObject($update);
+        return $statement->execute();
+    }
+
+    /**
+     * Fetch user data
+     * @param string $username
+     * @return bool
+     */
+    public function fetch($username)
+    {
+        $sql = new Sql($this->db);
+        $select = $sql->select(self::TABLE_NAME);
+        $select->where(['username' => $username])->limit(1);
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $result = $statement->execute();
+        return $result->current();
+    }
 }

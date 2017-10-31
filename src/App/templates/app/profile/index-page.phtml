@@ -1,4 +1,5 @@
 <?php
+/** @var array $profile */
 ?>
 
 <?php $this->layout('layout::profile', ['title' => 'Profile']) ?>
@@ -6,6 +7,10 @@
 <div class="row">
     <div class="col-sm-4">
         <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="/profile/edit" class="float-right">Edit</a>
+                Profile
+            </div>
             <div class="panel-body">
                 Nick: <?= $profile['nick'] ?>
             </div>

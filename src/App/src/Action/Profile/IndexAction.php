@@ -8,20 +8,27 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Interop\Container\ContainerInterface;
 use App\Action\BaseAction;
+use App\Model\User;
 
 class IndexAction extends BaseAction implements ServerMiddlewareInterface
 {
+    /** @var User */
+    protected $modelUser;
+
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
+
+        $this->modelUser = $container->get(User::class);
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        $userData = $this->modelUser->fetch($this->auth->getIdentity());
 
         $tplData = [
             'profile' => [
-                'nick' => $this->auth->getIdentity()
+                'nick' => $userData['nick'] ?: 'not filled'
             ]
         ];
 

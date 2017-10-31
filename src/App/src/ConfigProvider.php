@@ -47,6 +47,7 @@ class ConfigProvider
                 Action\Index\RegisterAction::class => Action\BaseFactory::class,
 
                 Action\Profile\IndexAction::class => Action\BaseFactory::class,
+                Action\Profile\EditAction::class => Action\BaseFactory::class,
 
                 Model\User::class => Model\ModelFactory::class,
             ],
