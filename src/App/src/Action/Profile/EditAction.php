@@ -41,7 +41,7 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
             }
 
         } else {
-            $userData = $this->modelUser->fetch($this->auth->getIdentity());
+            $userData = $this->modelUser->fetchRow(['username' => $this->auth->getIdentity()]);
             $params['nick'] = $userData['nick'];
         }
 

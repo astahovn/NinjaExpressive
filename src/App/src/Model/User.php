@@ -2,11 +2,18 @@
 
 namespace App\Model;
 
+use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 
 class User extends Model
 {
-    const TABLE_NAME = 'users';
+
+    public function __construct(Adapter $db)
+    {
+        parent::__construct($db);
+
+        $this->tableName = 'users';
+    }
 
     /**
      * New user registration
@@ -20,15 +27,10 @@ class User extends Model
             return 'Login is busy';
         }
 
-        $sql = new Sql($this->db);
-        $insert = $sql->insert(self::TABLE_NAME);
-        $insert->values([
+        return $this->create([
             'username' => $username,
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
-
-        $statement = $sql->prepareStatementForSqlObject($insert);
-        return $statement->execute();
     }
 
     /**
@@ -39,39 +41,11 @@ class User extends Model
     public function isExists($username)
     {
         $sql = new Sql($this->db);
-        $select = $sql->select(self::TABLE_NAME);
+        $select = $sql->select($this->tableName);
         $select->columns(['id'])->where(['username' => $username]);
         $statement = $sql->prepareStatementForSqlObject($select);
         $result = $statement->execute();
         return ($result->count() > 0);
     }
 
-    /**
-     * @param array $fields
-     * @param string $where
-     * @return \Zend\Db\Adapter\Driver\ResultInterface
-     */
-    public function update($fields, $where)
-    {
-        $sql = new Sql($this->db);
-        $update = $sql->update(self::TABLE_NAME);
-        $update->set($fields)->where($where);
-        $statement = $sql->prepareStatementForSqlObject($update);
-        return $statement->execute();
-    }
-
-    /**
-     * Fetch user data
-     * @param string $username
-     * @return bool
-     */
-    public function fetch($username)
-    {
-        $sql = new Sql($this->db);
-        $select = $sql->select(self::TABLE_NAME);
-        $select->where(['username' => $username])->limit(1);
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        return $result->current();
-    }
 }

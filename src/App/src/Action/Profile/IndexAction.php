@@ -24,7 +24,7 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $userData = $this->modelUser->fetch($this->auth->getIdentity());
+        $userData = $this->modelUser->fetchRow(['username' => $this->auth->getIdentity()]);
 
         $tplData = [
             'profile' => [
