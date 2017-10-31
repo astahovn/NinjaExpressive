@@ -25,19 +25,28 @@ class RegisterAction extends BaseAction implements ServerMiddlewareInterface
     {
         $method = $request->getMethod();
         $params = $request->getParsedBody();
-        $error = false;
+        $errors = [];
         $success = false;
         if ('POST' === $method) {
-            $error = (empty($params['login']) || empty($params['password']));
+            if (empty($params['login'])) {
+                $errors[] = 'Login field is empty';
+            }
+            if (empty($params['password'])) {
+                $errors[] = 'Password field is empty';
+            }
 
-            if (!$error) {
-                $this->modelUser->register($params['login'], $params['password']);
-                $success = true;
+            if (!count($errors)) {
+                $result = $this->modelUser->register($params['login'], $params['password']);
+                if (is_string($result)) {
+                    $errors[] = $result;
+                } else {
+                    $success = true;
+                }
             }
         }
 
         $tplData = [
-            'error' => $error,
+            'errors' => $errors,
             'success' => $success,
             'login' => $params['login'] ?? ''
         ];
