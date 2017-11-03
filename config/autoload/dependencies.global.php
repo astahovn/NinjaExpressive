@@ -36,6 +36,7 @@ return [
             Middleware\NotFoundHandler::class                => Container\NotFoundHandlerFactory::class,
 
             Zend\Db\Adapter\Adapter::class => Zend\Db\Adapter\AdapterServiceFactory::class,
+            'doctrine.entity_manager.orm_default' => \ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
     ],
 ];

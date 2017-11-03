@@ -18,6 +18,7 @@ class RegisterAction extends BaseAction implements ServerMiddlewareInterface
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
+
         $this->modelUser = $container->get(User::class);
     }
 

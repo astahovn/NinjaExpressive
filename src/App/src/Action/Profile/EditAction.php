@@ -19,6 +19,7 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
+
         $this->modelUser = $container->get(User::class);
     }
 
@@ -33,16 +34,16 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
             }
 
             if (!count($errors)) {
-                $this->modelUser->update(
-                    ['nick' => $params['nick']],
-                    ['username' => $this->auth->getIdentity()]
-                );
+                $user = $this->modelUser->findByUsername($this->auth->getIdentity());
+                $user->setNick($params['nick']);
+                $this->em->persist($user);
+                $this->em->flush();
                 return new RedirectResponse('/profile');
             }
 
         } else {
-            $userData = $this->modelUser->fetchRow(['username' => $this->auth->getIdentity()]);
-            $params['nick'] = $userData['nick'];
+            $user = $this->modelUser->findByUsername($this->auth->getIdentity());
+            $params['nick'] = $user->getNick();
         }
 
         $tplData = [

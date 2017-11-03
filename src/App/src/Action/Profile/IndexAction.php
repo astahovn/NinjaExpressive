@@ -24,11 +24,11 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $userData = $this->modelUser->fetchRow(['username' => $this->auth->getIdentity()]);
+        $user = $this->modelUser->findByUsername($this->auth->getIdentity());
 
         $tplData = [
             'profile' => [
-                'nick' => $userData['nick'] ?: 'not filled'
+                'nick' => $user->getNick() ?: 'not filled'
             ]
         ];
 

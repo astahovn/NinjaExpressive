@@ -2,50 +2,46 @@
 
 namespace App\Model;
 
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Sql\Sql;
+use Doctrine\ORM\EntityManager;
+use App\Entity\User as UserEntity;
 
 class User extends Model
 {
 
-    public function __construct(Adapter $db)
+    public function __construct(EntityManager $entityManager)
     {
-        parent::__construct($db);
+        parent::__construct($entityManager);
 
-        $this->tableName = 'users';
+        $this->rep = $this->em->getRepository(UserEntity::class);
     }
 
     /**
      * New user registration
      * @param string $username
      * @param string $password
-     * @return \Zend\Db\Adapter\Driver\ResultInterface|string
+     * @return boolean|string
      */
     public function register($username, $password)
     {
-        if ($this->isExists($username)) {
+        if ($this->rep->findOneByUsername($username)) {
             return 'Login is busy';
         }
 
-        return $this->create([
-            'username' => $username,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
-        ]);
+        $user = new UserEntity();
+        $user->setUsername($username);
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $this->em->persist($user);
+        $this->em->flush();
+        return true;
     }
 
     /**
-     * Check if user exists
      * @param string $username
-     * @return bool
+     * @return UserEntity
      */
-    public function isExists($username)
+    public function findByUsername($username)
     {
-        $sql = new Sql($this->db);
-        $select = $sql->select($this->tableName);
-        $select->columns(['id'])->where(['username' => $username]);
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $result = $statement->execute();
-        return ($result->count() > 0);
+        return $this->rep->findOneByUsername($username);
     }
 
 }
