@@ -36,6 +36,11 @@ class User
      */
     private $nick;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getNick()
     {
         return $this->nick;

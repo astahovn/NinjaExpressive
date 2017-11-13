@@ -9,7 +9,8 @@ class AuthServiceFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $authService = new AuthenticationService();
+        $authStorage = $container->get(AuthStorage::class);
+        $authService = new AuthenticationService($authStorage);
 
         return $authService;
     }

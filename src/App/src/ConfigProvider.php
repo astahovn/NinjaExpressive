@@ -37,16 +37,17 @@ class ConfigProvider
     {
         return [
             'invokables' => [
-                Action\LogoutAction::class => Action\LogoutAction::class,
             ],
             'factories'  => [
                 AuthAdapter::class => AuthAdapterFactory::class,
                 AuthService::class => AuthServiceFactory::class,
+                AuthStorage::class => Action\BaseFactory::class,
 
                 Middleware\RouteAuth::class => Action\BaseFactory::class,
 
                 Action\Index\IndexAction::class => Action\BaseFactory::class,
                 Action\Index\RegisterAction::class => Action\BaseFactory::class,
+                Action\LogoutAction::class => Action\BaseFactory::class,
 
                 Action\Profile\IndexAction::class => Action\BaseFactory::class,
                 Action\Profile\EditAction::class => Action\BaseFactory::class,

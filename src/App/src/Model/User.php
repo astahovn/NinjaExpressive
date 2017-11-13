@@ -44,4 +44,9 @@ class User extends Model
         return $this->rep->findOneByUsername($username);
     }
 
+    public function findById($id)
+    {
+        return $this->rep->find($id);
+    }
+
 }
