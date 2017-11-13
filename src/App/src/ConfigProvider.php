@@ -43,6 +43,8 @@ class ConfigProvider
                 AuthAdapter::class => AuthAdapterFactory::class,
                 AuthService::class => AuthServiceFactory::class,
 
+                Middleware\RouteAuth::class => Action\BaseFactory::class,
+
                 Action\Index\IndexAction::class => Action\BaseFactory::class,
                 Action\Index\RegisterAction::class => Action\BaseFactory::class,
 
