@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App;
 
 use Interop\Container\ContainerInterface;
 

@@ -41,16 +41,16 @@ class ConfigProvider
             'factories'  => [
                 AuthAdapter::class => AuthAdapterFactory::class,
                 AuthService::class => AuthServiceFactory::class,
-                AuthStorage::class => Action\BaseFactory::class,
+                AuthStorage::class => BaseFactory::class,
 
-                Middleware\RouteAuth::class => Action\BaseFactory::class,
+                Middleware\RouteAuth::class => BaseFactory::class,
 
-                Action\Index\IndexAction::class => Action\BaseFactory::class,
-                Action\Index\RegisterAction::class => Action\BaseFactory::class,
-                Action\LogoutAction::class => Action\BaseFactory::class,
+                Action\Index\IndexAction::class => BaseFactory::class,
+                Action\Index\RegisterAction::class => BaseFactory::class,
+                Action\LogoutAction::class => BaseFactory::class,
 
-                Action\Profile\IndexAction::class => Action\BaseFactory::class,
-                Action\Profile\EditAction::class => Action\BaseFactory::class,
+                Action\Profile\IndexAction::class => BaseFactory::class,
+                Action\Profile\EditAction::class => BaseFactory::class,
 
                 Model\User::class => Model\ModelFactory::class,
             ],
