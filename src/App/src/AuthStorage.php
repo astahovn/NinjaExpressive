@@ -11,12 +11,14 @@ use App\Model\User;
 class AuthStorage implements Storage\StorageInterface
 {
     const COOKIE_NAME = 'ninja_token';
+    const TABLE_SESSIONS = 'sessions';
 
     protected $sql;
 
     /** @var User */
     protected $modelUser;
 
+    /** @var int $identity Auth user id */
     protected $identity;
 
     public function __construct(ContainerInterface $container)
@@ -41,7 +43,7 @@ class AuthStorage implements Storage\StorageInterface
         if (empty($_COOKIE[self::COOKIE_NAME])) {
             return true;
         }
-        $select = $this->sql->select('sessions');
+        $select = $this->sql->select(self::TABLE_SESSIONS);
         $select->where(['auth_token' => $_COOKIE[self::COOKIE_NAME]]);
         $statement = $this->sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
@@ -79,7 +81,7 @@ class AuthStorage implements Storage\StorageInterface
     {
         $user = $this->modelUser->findByUsername($contents);
         $token = md5(time());
-        $insert = $this->sql->insert('sessions');
+        $insert = $this->sql->insert(self::TABLE_SESSIONS);
         $insert->values([
             'user_id' => $user->getId(),
             'auth_token' => $token,
@@ -102,7 +104,7 @@ class AuthStorage implements Storage\StorageInterface
      */
     public function clear()
     {
-        $delete = $this->sql->delete('sessions');
+        $delete = $this->sql->delete(self::TABLE_SESSIONS);
         $delete->where(['auth_token' => $_COOKIE[self::COOKIE_NAME]]);
         $statement = $this->sql->prepareStatementForSqlObject($delete);
         $statement->execute();
