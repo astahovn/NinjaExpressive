@@ -24,11 +24,9 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $user = $this->modelUser->findByUsername($this->auth->getIdentity());
-
         $tplData = [
             'profile' => [
-                'nick' => $user->getNick() ?: 'not filled'
+                'nick' => $this->activeUser->getNick() ?: 'not filled'
             ]
         ];
 

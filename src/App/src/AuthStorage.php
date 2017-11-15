@@ -47,8 +47,7 @@ class AuthStorage implements Storage\StorageInterface
         $results = $statement->execute();
         if ($results->count()) {
             $session = $results->current();
-            $user = $this->modelUser->findById($session['user_id']);
-            $this->identity = $user->getUsername();
+            $this->identity = $session['user_id'];
 
         } else {
             setcookie(self::COOKIE_NAME);
@@ -83,14 +82,16 @@ class AuthStorage implements Storage\StorageInterface
         $insert = $this->sql->insert('sessions');
         $insert->values([
             'user_id' => $user->getId(),
-            'auth_token' => $token
+            'auth_token' => $token,
+            'date_login' => 'now()',
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
         ]);
         $statement = $this->sql->prepareStatementForSqlObject($insert);
         $statement->execute();
 
         setcookie(self::COOKIE_NAME, $token, time()+60*60*24);
 
-        $this->identity = $contents;
+        $this->identity = $user->getId();
     }
 
     /**

@@ -34,7 +34,7 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
             }
 
             if (!count($errors)) {
-                $user = $this->modelUser->findByUsername($this->auth->getIdentity());
+                $user = $this->modelUser->findById($this->activeUser->getId());
                 $user->setNick($params['nick']);
                 $this->em->persist($user);
                 $this->em->flush();
@@ -42,8 +42,7 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
             }
 
         } else {
-            $user = $this->modelUser->findByUsername($this->auth->getIdentity());
-            $params['nick'] = $user->getNick();
+            $params['nick'] = $this->activeUser->getNick();
         }
 
         $tplData = [
