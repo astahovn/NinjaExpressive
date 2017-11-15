@@ -10,6 +10,8 @@ use App\Model\User;
 
 class AuthStorage implements Storage\StorageInterface
 {
+    const COOKIE_NAME = 'ninja_token';
+
     protected $sql;
 
     /** @var User */
@@ -36,20 +38,20 @@ class AuthStorage implements Storage\StorageInterface
         if (null !== $this->identity) {
             return false;
         }
-        if (empty($_COOKIE['PHPSESSID'])) {
-            if (!session_id()) {
-                session_start();
-            }
+        if (empty($_COOKIE[self::COOKIE_NAME])) {
             return true;
         }
         $select = $this->sql->select('sessions');
-        $select->where(['auth_token' => $_COOKIE['PHPSESSID']]);
+        $select->where(['auth_token' => $_COOKIE[self::COOKIE_NAME]]);
         $statement = $this->sql->prepareStatementForSqlObject($select);
         $results = $statement->execute();
         if ($results->count()) {
             $session = $results->current();
             $user = $this->modelUser->findById($session['user_id']);
             $this->identity = $user->getUsername();
+
+        } else {
+            setcookie(self::COOKIE_NAME);
         }
         return is_null($this->identity);
     }
@@ -77,13 +79,16 @@ class AuthStorage implements Storage\StorageInterface
     public function write($contents)
     {
         $user = $this->modelUser->findByUsername($contents);
+        $token = md5(time());
         $insert = $this->sql->insert('sessions');
         $insert->values([
             'user_id' => $user->getId(),
-            'auth_token' => $_COOKIE['PHPSESSID']
+            'auth_token' => $token
         ]);
         $statement = $this->sql->prepareStatementForSqlObject($insert);
         $statement->execute();
+
+        setcookie(self::COOKIE_NAME, $token, time()+60*60*24);
 
         $this->identity = $contents;
     }
@@ -97,10 +102,11 @@ class AuthStorage implements Storage\StorageInterface
     public function clear()
     {
         $delete = $this->sql->delete('sessions');
-        $delete->where(['auth_token' => $_COOKIE['PHPSESSID']]);
+        $delete->where(['auth_token' => $_COOKIE[self::COOKIE_NAME]]);
         $statement = $this->sql->prepareStatementForSqlObject($delete);
         $statement->execute();
 
+        setcookie(self::COOKIE_NAME);
         $this->identity = null;
     }
 }
