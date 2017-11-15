@@ -12,9 +12,9 @@ use Zend\Diactoros\Response\RedirectResponse;
 class RouteAuth extends BaseAction implements ServerMiddlewareInterface
 {
 
-    protected $authPages = [
-        '/profile',
-        '/profile/edit',
+    protected $guestPages = [
+        '/',
+        '/register',
     ];
 
     public function __construct(ContainerInterface $container)
@@ -24,8 +24,11 @@ class RouteAuth extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        if (!$this->auth->hasIdentity() && in_array($request->getUri()->getPath(), $this->authPages)) {
+        if (!$this->auth->hasIdentity() && !in_array($request->getUri()->getPath(), $this->guestPages)) {
             return new RedirectResponse('/');
+        }
+        if ($this->auth->hasIdentity() && in_array($request->getUri()->getPath(), $this->guestPages)) {
+            return new RedirectResponse('/profile');
         }
 
         return $delegate->process($request);

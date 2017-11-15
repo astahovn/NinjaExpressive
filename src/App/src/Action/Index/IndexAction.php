@@ -24,10 +24,6 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        if ($this->auth->hasIdentity()) {
-            return new RedirectResponse('/profile');
-        }
-
         $method = $request->getMethod();
         $params = $request->getParsedBody();
         $error = false;
