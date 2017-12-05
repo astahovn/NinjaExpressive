@@ -1,25 +1,38 @@
 <?php
 /** @var string $nick */
+/** @var string $open_key */
 /** @var array $errors */
 ?>
 
 <?php $this->layout('layout::profile', ['title' => 'Profile - Edit']) ?>
 
 <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-6">
         <div class="panel panel-primary">
             <div class="panel-heading">Profile</div>
             <div class="panel-body">
-                <form action="/profile/edit" method="post">
+                <form action="/profile/edit" method="post" id="profile_edit_form">
                     <div class="form-group">
-                        <input type="text" name="nick" class="form-control" placeholder="Nick" value="<?= $nick ?>">
+                        <label for="nick">Nick</label>
+                        <input type="text" name="nick" id="nick" class="form-control" placeholder="Nick" value="<?= $nick ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="openKey">Open key</label>
+                        <textarea name="open_key" id="openKey" rows="10" class="form-control"><?= $open_key ?></textarea>
                     </div>
                     <?php if (count($errors) > 0): ?>
                         <div class="alert alert-danger"><?= implode('<br />', $errors) ?></div>
                     <?php endif; ?>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="form-group float-right">
+                        <button type="button" class="btn btn-primary" id="button_cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<?php $this->start('javascript') ?>
+<script src="/js/profile.js"></script>
+<?php $this->stop() ?>

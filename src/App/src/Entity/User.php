@@ -36,6 +36,12 @@ class User
      */
     private $nick;
 
+    /**
+     * @ORM\Column(name="open_key", type="string")
+     * @var string
+     */
+    private $open_key;
+
     public function getId()
     {
         return $this->id;
@@ -66,4 +72,13 @@ class User
         $this->password = $password;
     }
 
+    public function getOpenKey()
+    {
+        return $this->open_key;
+    }
+
+    public function setOpenKey($openKey)
+    {
+        $this->open_key = $openKey;
+    }
 }

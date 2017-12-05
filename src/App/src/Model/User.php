@@ -44,6 +44,10 @@ class User extends Model
         return $this->rep->findOneByUsername($username);
     }
 
+    /**
+     * @param int $id
+     * @return UserEntity
+     */
     public function findById($id)
     {
         return $this->rep->find($id);

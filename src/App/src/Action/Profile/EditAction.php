@@ -36,6 +36,7 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
             if (!count($errors)) {
                 $user = $this->modelUser->findById($this->activeUser->getId());
                 $user->setNick($params['nick']);
+                $user->setOpenKey($params['open_key']);
                 $this->em->persist($user);
                 $this->em->flush();
                 return new RedirectResponse('/profile');
@@ -43,11 +44,13 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
 
         } else {
             $params['nick'] = $this->activeUser->getNick();
+            $params['open_key'] = $this->activeUser->getOpenKey();
         }
 
         $tplData = [
             'errors' => $errors,
-            'nick' => $params['nick'] ?? ''
+            'nick' => $params['nick'] ?? '',
+            'open_key' => $params['open_key'] ?? '',
         ];
 
         return new HtmlResponse($this->template->render('app-profile::edit-page', $tplData));
