@@ -7,3 +7,7 @@ Tasks, comments and messaging - everything stored in a crypted way.
 
 * PHP 7
 * Zend Expressive
+
+## Database migrations
+
+Database migrations situated in [Ninja migrations](https://github.com/astahovn/NinjaMigrations) repo.
