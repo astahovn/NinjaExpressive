@@ -26,7 +26,8 @@ class IndexAction extends BaseAction implements ServerMiddlewareInterface
     {
         $tplData = [
             'profile' => [
-                'nick' => $this->activeUser->getNick() ?: 'not filled'
+                'nick' => $this->activeUser->getNick() ?: 'not filled',
+                'has_open_key' => !!$this->activeUser->getOpenKey(),
             ]
         ];
 

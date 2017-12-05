@@ -79,6 +79,6 @@ class User
 
     public function setOpenKey($openKey)
     {
-        $this->open_key = $openKey;
+        $this->open_key = trim($openKey);
     }
 }

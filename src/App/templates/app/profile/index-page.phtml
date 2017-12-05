@@ -12,7 +12,16 @@
                 Profile
             </div>
             <div class="panel-body">
-                Nick: <?= $profile['nick'] ?>
+                Nick: <?= $profile['nick'] ?><br>
+                Open key: <?php if ($profile['has_open_key']): ?><span class="zf-green">Ok</span><?php else: ?><span class="red">empty</span><?php endif ?>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="/chat/create" class="float-right">Create</a>
+                Chats
+            </div>
+            <div class="panel-body">
             </div>
         </div>
     </div>

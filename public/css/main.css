@@ -20,6 +20,10 @@ body {
     color: #68b604;
 }
 
+.red {
+    color: #c9302c;
+}
+
 .form-auth {
     margin: 0 auto;
     width: 300px;
