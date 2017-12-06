@@ -4,6 +4,7 @@ $.when( $.ready ).then(function() {
     });
 
     $('#chat_create_form').submit(function(event) {
+        var token = ninjaCrypto.createToken();
         event.preventDefault();
     });
 });
