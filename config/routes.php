@@ -32,4 +32,6 @@ $app->route('/register', App\Action\Index\RegisterAction::class, ['GET', 'POST']
 $app->get('/profile', App\Action\Profile\IndexAction::class, 'home');
 $app->route('/profile/edit', App\Action\Profile\EditAction::class, ['GET', 'POST'], 'profile.edit');
 
+$app->route('/chat/create', App\Action\Chat\CreateAction::class, ['GET', 'POST'], 'chat.create');
+
 $app->get('/logout', App\Action\LogoutAction::class, 'logout');
