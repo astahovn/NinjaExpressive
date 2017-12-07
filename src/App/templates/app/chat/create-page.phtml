@@ -10,7 +10,7 @@
             <div class="panel-heading">New Chat</div>
             <div class="panel-body">
                 <div class="hidden" id="active-user-open-key"><?= $activeUser->getOpenKey() ?></div>
-                <form action="/chat/create" method="post" id="chat_create_form">
+                <form id="chat_create_form">
                     <div class="form-group">
                         <label for="theme">Theme</label>
                         <input type="text" name="theme" id="theme" class="form-control" />

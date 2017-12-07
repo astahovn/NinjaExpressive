@@ -8,6 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Interop\Container\ContainerInterface;
 use App\Action\BaseAction;
+use Zend\Diactoros\Response\JsonResponse;
 
 class CreateAction extends BaseAction implements ServerMiddlewareInterface
 {
@@ -18,6 +19,16 @@ class CreateAction extends BaseAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-       return new HtmlResponse($this->template->render('app-chat::create-page', []));
+        $method = $request->getMethod();
+        $params = $request->getParsedBody();
+        if ('POST' === $method) {
+            if (empty($params['key']) || empty($params['theme'])) {
+                return new JsonResponse(['error' => 'Not enough data for saving']);
+            }
+            // Create conversation
+            // ...
+            return new JsonResponse(['success' => true]);
+        }
+        return new HtmlResponse($this->template->render('app-chat::create-page', []));
     }
 }

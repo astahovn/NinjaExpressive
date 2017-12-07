@@ -10,8 +10,6 @@ $.when( $.ready ).then(function() {
             $theme = $('#theme'),
             $openKey = $('#active-user-open-key');
 
-        $themeError.addClass('hidden').html('');
-
         // Get chat theme
         var theme = $theme.val();
         if (!theme.trim()) {
@@ -25,5 +23,14 @@ $.when( $.ready ).then(function() {
         // Encrypt chat key with open key of current user
         var openKey = $openKey.html();
         var encKey = ninjaCrypto.encryptRsa(key, openKey);
+
+        $.post("/chat/create", {theme: encTheme, key: encKey})
+            .done(function(data) {
+                if (data.success) {
+                    window.location.href = '/profile';
+                    return;
+                }
+                $themeError.html(data.error).removeClass('hidden');
+            });
     });
 });
