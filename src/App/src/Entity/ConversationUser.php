@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Conversation;
 
 /**
  * @ORM\Entity
@@ -34,7 +35,10 @@ class ConversationUser
      * @ORM\Column(name="key", type="string", length=255)
      * @var string
      */
-    private $key;
+    protected $key;
+
+    /** @ORM\ManyToOne(targetEntity="Conversation") */
+    protected $conversation;
 
     public function getId()
     {
@@ -69,6 +73,14 @@ class ConversationUser
     public function setUserId($user_id)
     {
         $this->user_id = $user_id;
+    }
+
+    /**
+     * @return \App\Entity\Conversation
+     */
+    public function getConversation()
+    {
+        return $this->conversation;
     }
 
 }

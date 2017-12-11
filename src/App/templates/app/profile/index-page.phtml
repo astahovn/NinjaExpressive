@@ -1,5 +1,6 @@
 <?php
 /** @var array $profile */
+/** @var array $conversations */
 ?>
 
 <?php $this->layout('layout::profile', ['title' => 'Profile']) ?>
@@ -22,7 +23,18 @@
                 Conversations
             </div>
             <div class="panel-body">
+                <div class="hidden" id="conversations">
+                    <?= json_encode($conversations) ?>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<?php $this->start('javascript') ?>
+<script src="/js/lib/sha256.js"></script>
+<script src="/js/lib/tripledes.js"></script>
+<script src="/js/lib/jsencrypt.min.js"></script>
+<script src="/js/crypto.js"></script>
+<script src="/js/profile/index.js"></script>
+<?php $this->stop() ?>
