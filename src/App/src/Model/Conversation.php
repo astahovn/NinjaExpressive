@@ -52,6 +52,7 @@ class Conversation extends Model
         $userConversations = $this->repUsers->findBy(['user_id' => $userId]);
         foreach ($userConversations as $userConversation) {
             $result[] = [
+                'id' => $userConversation->getConversation()->getId(),
                 'theme' => $userConversation->getConversation()->getTheme(),
                 'key' => $userConversation->getKey()
             ];

@@ -14,7 +14,9 @@
             </div>
             <div class="panel-body">
                 Nick: <?= $profile['nick'] ?><br>
-                Open key: <?php if ($profile['has_open_key']): ?><span class="zf-green">Ok</span><?php else: ?><span class="red">empty</span><?php endif ?>
+                Open key: <?php if ($profile['has_open_key']): ?><span class="zf-green">Ok</span><?php else: ?><span class="red">empty</span><?php endif ?><br>
+                Private key: <span class="zf-green" style="display:none;" id="private_key_ok">Ok</span>
+                <div id="private_key_selector"><input type="file" id="fileInput"></div>
             </div>
         </div>
         <div class="panel panel-default">
@@ -26,6 +28,7 @@
                 <div class="hidden" id="conversations">
                     <?= json_encode($conversations) ?>
                 </div>
+                <div id="conversations_list"></div>
             </div>
         </div>
     </div>
