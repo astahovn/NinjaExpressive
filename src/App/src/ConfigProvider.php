@@ -55,6 +55,7 @@ class ConfigProvider
                 Action\Chat\CreateAction::class => BaseFactory::class,
 
                 Model\User::class => Model\ModelFactory::class,
+                Model\Conversation::class => Model\ModelFactory::class,
             ],
         ];
     }
