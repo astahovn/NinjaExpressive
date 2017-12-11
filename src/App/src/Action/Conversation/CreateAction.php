@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action\Chat;
+namespace App\Action\Conversation;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -34,6 +34,6 @@ class CreateAction extends BaseAction implements ServerMiddlewareInterface
             $this->mConversation->create($params['theme'], $params['key'], $this->activeUser->getId());
             return new JsonResponse(['success' => true]);
         }
-        return new HtmlResponse($this->template->render('app-chat::create-page', []));
+        return new HtmlResponse($this->template->render('app-conversation::create-page', []));
     }
 }

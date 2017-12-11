@@ -3,7 +3,7 @@ $.when( $.ready ).then(function() {
         window.location.href = '/profile';
     });
 
-    $('#chat_create_form').submit(function(event) {
+    $('#conversation_create_form').submit(function(event) {
         event.preventDefault();
         var
             $themeError = $('#theme-error'),
@@ -24,7 +24,7 @@ $.when( $.ready ).then(function() {
         var openKey = $openKey.html();
         var encKey = ninjaCrypto.encryptRsa(key, openKey);
 
-        $.post("/chat/create", {theme: encTheme, key: encKey})
+        $.post("/conversation/create", {theme: encTheme, key: encKey})
             .done(function(data) {
                 if (data.success) {
                     window.location.href = '/profile';

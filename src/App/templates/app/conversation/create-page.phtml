@@ -2,15 +2,15 @@
 /** @var App\Entity\User $activeUser */
 ?>
 
-<?php $this->layout('layout::profile', ['title' => 'Chat - Create']) ?>
+<?php $this->layout('layout::profile', ['title' => 'Conversation - Create']) ?>
 
 <div class="row">
     <div class="col-sm-6">
         <div class="panel panel-primary">
-            <div class="panel-heading">New Chat</div>
+            <div class="panel-heading">New Conversation</div>
             <div class="panel-body">
                 <div class="hidden" id="active-user-open-key"><?= $activeUser->getOpenKey() ?></div>
-                <form id="chat_create_form">
+                <form id="conversation_create_form">
                     <div class="form-group">
                         <label for="theme">Theme</label>
                         <input type="text" name="theme" id="theme" class="form-control" />
@@ -31,5 +31,5 @@
 <script src="/js/lib/tripledes.js"></script>
 <script src="/js/lib/jsencrypt.min.js"></script>
 <script src="/js/crypto.js"></script>
-<script src="/js/chat.js"></script>
+<script src="/js/conversation.js"></script>
 <?php $this->stop() ?>

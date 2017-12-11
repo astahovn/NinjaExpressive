@@ -52,7 +52,7 @@ class ConfigProvider
                 Action\Profile\IndexAction::class => BaseFactory::class,
                 Action\Profile\EditAction::class => BaseFactory::class,
 
-                Action\Chat\CreateAction::class => BaseFactory::class,
+                Action\Conversation\CreateAction::class => BaseFactory::class,
 
                 Model\User::class => Model\ModelFactory::class,
                 Model\Conversation::class => Model\ModelFactory::class,
@@ -71,7 +71,7 @@ class ConfigProvider
             'paths' => [
                 'app-index'    => [__DIR__ . '/../templates/app/index'],
                 'app-profile'    => [__DIR__ . '/../templates/app/profile'],
-                'app-chat'    => [__DIR__ . '/../templates/app/chat'],
+                'app-conversation'    => [__DIR__ . '/../templates/app/conversation'],
                 'error'  => [__DIR__ . '/../templates/error'],
                 'layout' => [__DIR__ . '/../templates/layout'],
             ],
