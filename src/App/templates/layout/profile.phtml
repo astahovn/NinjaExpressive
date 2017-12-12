@@ -33,7 +33,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $activeUser->getUsername() ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="#" id="button_logout">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -61,6 +61,7 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="/js/profile/common.js"></script>
 <?=$this->section('javascript')?>
 </body>
 </html>
