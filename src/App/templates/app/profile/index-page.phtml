@@ -15,8 +15,7 @@
             <div class="panel-body">
                 Nick: <?= $profile['nick'] ?><br>
                 Open key: <?php if ($profile['has_open_key']): ?><span class="zf-green">Ok</span><?php else: ?><span class="red">empty</span><?php endif ?><br>
-                Private key: <span class="zf-green" style="display:none;" id="private_key_ok">Ok</span>
-                <div id="private_key_selector"><input type="file" id="fileInput"></div>
+                Private key: <span id="private_key_ok" class="zf-green" style="display:none;">Ok</span><span id="private_key_empty" style="display:none;"><a class="red" href="/profile">Not selected</a></span>
             </div>
         </div>
         <div class="panel panel-default">

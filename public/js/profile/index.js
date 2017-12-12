@@ -1,32 +1,11 @@
 $.when( $.ready ).then(function() {
     if (sessionStorage.getItem('private_key')) {
-        $('#private_key_selector').hide();
+        $('#private_key_empty').hide();
         $('#private_key_ok').show();
     } else {
-        $('#private_key_selector').show();
+        $('#private_key_empty').show();
         $('#private_key_ok').hide();
     }
-
-    var fileInput = document.getElementById('fileInput');
-    var fileDisplayArea = document.getElementById('fileDisplayArea');
-
-    fileInput.addEventListener('change', function(e) {
-        var file = fileInput.files[0];
-        var textType = /.*-x509-ca-cert/;
-
-        if (file.type.match(textType)) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                sessionStorage.setItem('private_key', reader.result);
-                window.location.reload(false);
-            };
-
-            reader.readAsText(file);
-        } else {
-            fileDisplayArea.innerText = "File not supported!"
-        }
-    });
 
     var privateKey = sessionStorage.getItem('private_key');
     if (!privateKey) {
