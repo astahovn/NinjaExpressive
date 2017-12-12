@@ -20,12 +20,6 @@ class ConversationUser
     protected $id;
 
     /**
-     * @ORM\Column(name="conversation_id", type="integer")
-     * @var int
-     */
-    protected $conversation_id;
-
-    /**
      * @ORM\Column(name="user_id", type="integer")
      * @var int
      */
@@ -55,16 +49,6 @@ class ConversationUser
         $this->key = $key;
     }
 
-    public function getConversationId()
-    {
-        return $this->conversation_id;
-    }
-
-    public function setConversationId($conversation_id)
-    {
-        $this->conversation_id = $conversation_id;
-    }
-
     public function getUserId()
     {
         return $this->user_id;
@@ -83,4 +67,8 @@ class ConversationUser
         return $this->conversation;
     }
 
+    public function setConversation(Conversation $conversation)
+    {
+        $this->conversation = $conversation;
+    }
 }

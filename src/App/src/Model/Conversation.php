@@ -38,7 +38,7 @@ class Conversation extends Model
 
         // Create first user
         $conversationUser = new ConversationUserEntity();
-        $conversationUser->setConversationId($conversation->getId());
+        $conversationUser->setConversation($conversation);
         $conversationUser->setUserId($userId);
         $conversationUser->setKey($key);
         $this->em->persist($conversationUser);
