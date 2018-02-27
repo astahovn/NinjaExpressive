@@ -9,7 +9,8 @@ module.exports = function(grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        'public/js/mod_profile.js'
+                        'public/js/mod_profile.js',
+                        'public/js/mod_profile.js.map'
                     ]
                 }]
             },

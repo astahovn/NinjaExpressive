@@ -1,15 +1,5 @@
 Application.modules.profileIndex = (function(self) {
     var
-        _profilePrivateKeyStatus = function() {
-            if (sessionStorage.getItem('private_key')) {
-                $('#private_key_empty').hide();
-                $('#private_key_ok').show();
-            } else {
-                $('#private_key_empty').show();
-                $('#private_key_ok').hide();
-            }
-        },
-
         _loadConversationsList = function() {
             var privateKey = sessionStorage.getItem('private_key');
             var $conversationList = $('#conversations_list');
@@ -40,7 +30,6 @@ Application.modules.profileIndex = (function(self) {
         ;
 
     self.load = function() {
-        _profilePrivateKeyStatus();
         _loadConversationsList();
     };
 
