@@ -1,5 +1,8 @@
 .idea
+.tmp
 composer.phar
+
+public/js/mod_*
 
 clover.xml
 coveralls-upload.json

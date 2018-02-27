@@ -16,7 +16,8 @@
                 Nick: <?= $profile['nick'] ?><br>
                 Open key: <?php if ($profile['has_open_key']): ?><span class="zf-green">Ok</span><?php else: ?><span class="red">empty</span><?php endif ?><br>
                 Private key: <span id="private_key_ok" class="zf-green" style="display:none;">Ok</span><span id="private_key_empty" style="display:none;"><a class="red" href="/profile">Not selected</a></span><br>
-                Time: <span id="time"></span>
+                Time: <span id="time"></span><br>
+                Time 2: <span id="time2"></span>
             </div>
         </div>
         <div class="panel panel-default">
@@ -40,5 +41,5 @@
 <script src="/js/lib/jsencrypt.min.js"></script>
 <script src="/js/crypto.js"></script>
 <script src="/js/profile/index.js"></script>
-<script src="/js/profile/test.min.js"></script>
+<script src="/js/mod_profile.js"></script>
 <?php $this->stop() ?>
