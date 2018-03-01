@@ -1,4 +1,4 @@
-class ProfileViewBlock extends React.Component {
+class ProfileStatusWidget extends React.Component {
     constructor(props) {
         super(props);
     }

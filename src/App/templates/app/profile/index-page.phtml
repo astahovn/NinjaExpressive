@@ -12,7 +12,7 @@
                 <a href="/profile/edit" class="float-right">Edit</a>
                 Profile
             </div>
-            <div class="panel-body" id="profile-view-block"></div>
+            <div class="panel-body" id="profile-status-widget"></div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -32,8 +32,8 @@
 <script src="/js/mod_profile.js"></script>
 <script language="JavaScript">
     ReactDOM.render(
-        React.createElement(ProfileViewBlock, {nick: '<?= $profile['nick'] ?>', hasOpenKey: '<?= $profile['has_open_key'] ?>'}, null),
-        document.getElementById('profile-view-block')
+        React.createElement(ProfileStatusWidget, {nick: '<?= $profile['nick'] ?>', hasOpenKey: '<?= $profile['has_open_key'] ?>'}, null),
+        document.getElementById('profile-status-widget')
     );
     ReactDOM.render(
         React.createElement(ConversationsWidget, {conversations: '<?= json_encode($conversations) ?>'}, null),
