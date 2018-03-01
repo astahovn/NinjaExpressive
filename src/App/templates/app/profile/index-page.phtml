@@ -19,12 +19,7 @@
                 <a href="/conversation/create" class="float-right">Create</a>
                 Conversations
             </div>
-            <div class="panel-body">
-                <div class="hidden" id="conversations">
-                    <?= json_encode($conversations) ?>
-                </div>
-                <div id="conversations_list"></div>
-            </div>
+            <div class="panel-body" id="profile-conversations-widget"></div>
         </div>
     </div>
 </div>
@@ -34,12 +29,15 @@
 <script src="/js/lib/tripledes.js"></script>
 <script src="/js/lib/jsencrypt.min.js"></script>
 <script src="/js/crypto.js"></script>
-<script src="/js/profile/index.js"></script>
 <script src="/js/mod_profile.js"></script>
 <script language="JavaScript">
     ReactDOM.render(
         React.createElement(ProfileViewBlock, {nick: '<?= $profile['nick'] ?>', hasOpenKey: '<?= $profile['has_open_key'] ?>'}, null),
         document.getElementById('profile-view-block')
+    );
+    ReactDOM.render(
+        React.createElement(ConversationsWidget, {conversations: '<?= json_encode($conversations) ?>'}, null),
+        document.getElementById('profile-conversations-widget')
     );
 </script>
 <?php $this->stop() ?>
