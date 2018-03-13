@@ -60,4 +60,15 @@ class Conversation extends Model
         return $result;
     }
 
+    /**
+     * @param int $id
+     * @return ConversationEntity
+     */
+    public function findById($id)
+    {
+        /** @var ConversationEntity $entity */
+        $entity = $this->rep->find($id);
+        return $entity;
+    }
+
 }

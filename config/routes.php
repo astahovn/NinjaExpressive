@@ -33,5 +33,6 @@ $app->get('/profile', App\Action\Profile\IndexAction::class, 'home');
 $app->route('/profile/edit', App\Action\Profile\EditAction::class, ['GET', 'POST'], 'profile.edit');
 
 $app->route('/conversation/create', App\Action\Conversation\CreateAction::class, ['GET', 'POST'], 'conversation.create');
+$app->get('/conversation/chat/{id:\d+}', App\Action\Conversation\ChatAction::class, 'conversation.chat');
 
 $app->get('/logout', App\Action\LogoutAction::class, 'logout');

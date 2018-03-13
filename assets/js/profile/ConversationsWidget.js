@@ -15,7 +15,7 @@ class ConversationsWidget extends React.Component {
             let key = ninjaCrypto.decryptRsa(conversation.key, privateKey);
             let theme = ninjaCrypto.decryptTripleDES(conversation.theme, key);
             resultConversations.push({
-                'url': '/conversation/' + conversation.id,
+                'url': '/conversation/chat/' + conversation.id,
                 'theme': theme
             });
         }

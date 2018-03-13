@@ -53,6 +53,7 @@ class ConfigProvider
                 Action\Profile\EditAction::class => BaseFactory::class,
 
                 Action\Conversation\CreateAction::class => BaseFactory::class,
+                Action\Conversation\ChatAction::class => BaseFactory::class,
 
                 Model\User::class => Model\ModelFactory::class,
                 Model\Conversation::class => Model\ModelFactory::class,
