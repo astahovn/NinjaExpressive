@@ -10,6 +10,10 @@ Application.modules.profileCommon = (function(self) {
         },
 
         _autoCheckPrivateKey = function() {
+            var openKey = $('#active_user_open_key').html();
+            if (!openKey) {
+                return;
+            }
             if (sessionStorage.getItem('private_key')) {
                 return;
             }

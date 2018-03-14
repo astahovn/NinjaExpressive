@@ -21,6 +21,10 @@ Application.modules.profileEdit = (function(self) {
                     }
                     // Encrypt check word with open key, for further checking
                     var privateKeyCheck = ninjaCrypto.encryptRsa('private_key_check', $openKey.val());
+                    if (!privateKeyCheck) {
+                        $errors.html('The open key is wrong').removeClass('hidden');
+                        return;
+                    }
 
                     var actionData = {
                         nick: $nick.val(),
