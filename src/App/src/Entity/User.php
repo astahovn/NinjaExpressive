@@ -42,6 +42,12 @@ class User
      */
     private $open_key;
 
+    /**
+     * @ORM\Column(name="private_key_check", type="string")
+     * @var string
+     */
+    private $private_key_check;
+
     public function getId()
     {
         return $this->id;
@@ -80,5 +86,15 @@ class User
     public function setOpenKey($openKey)
     {
         $this->open_key = trim($openKey);
+    }
+
+    public function getPrivateKeyCheck()
+    {
+        return $this->private_key_check;
+    }
+
+    public function setPrivateKeyCheck($privateKeyCheck)
+    {
+        $this->private_key_check = trim($privateKeyCheck);
     }
 }

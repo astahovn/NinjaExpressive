@@ -24,8 +24,14 @@ Application.modules.profileCommon = (function(self) {
                     var reader = new FileReader();
 
                     reader.onload = function(e) {
-                        sessionStorage.setItem('private_key', reader.result);
-                        window.location.reload(false);
+                        var privateKeyCheck = $('#active_user_private_key_check').html();
+                        var checkWord = ninjaCrypto.decryptRsa(privateKeyCheck, reader.result);
+                        if ('private_key_check' === checkWord) {
+                            sessionStorage.setItem('private_key', reader.result);
+                            window.location.reload(false);
+                        } else {
+                            fileDisplayArea.innerText = "The private key is not corresponded to open key!"
+                        }
                     };
 
                     reader.readAsText(file);

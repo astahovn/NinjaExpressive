@@ -9,6 +9,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Interop\Container\ContainerInterface;
 use App\Action\BaseAction;
 use App\Model\User;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 
 class EditAction extends BaseAction implements ServerMiddlewareInterface
@@ -37,9 +38,10 @@ class EditAction extends BaseAction implements ServerMiddlewareInterface
                 $user = $this->modelUser->findById($this->activeUser->getId());
                 $user->setNick($params['nick']);
                 $user->setOpenKey($params['open_key']);
+                $user->setPrivateKeyCheck($params['private_key_check']);
                 $this->em->persist($user);
                 $this->em->flush();
-                return new RedirectResponse('/profile');
+                return new JsonResponse(['success' => true]);
             }
 
         } else {

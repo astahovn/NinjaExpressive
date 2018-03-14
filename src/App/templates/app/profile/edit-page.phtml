@@ -20,6 +20,7 @@
                         <label for="openKey">Open key</label>
                         <textarea name="open_key" id="openKey" rows="10" class="form-control"><?= $open_key ?></textarea>
                     </div>
+                    <div class="alert alert-danger hidden" id="errors"></div>
                     <?php if (count($errors) > 0): ?>
                         <div class="alert alert-danger"><?= implode('<br />', $errors) ?></div>
                     <?php endif; ?>
@@ -34,5 +35,7 @@
 </div>
 
 <?php $this->start('javascript') ?>
+<script src="/js/lib/jsencrypt.min.js"></script>
+<script src="/js/crypto.js"></script>
 <script src="/js/profile/edit.js"></script>
 <?php $this->stop() ?>
