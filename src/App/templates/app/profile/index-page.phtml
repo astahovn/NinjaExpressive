@@ -25,11 +25,6 @@
 </div>
 
 <?php $this->start('javascript') ?>
-<script src="/js/lib/sha256.js"></script>
-<script src="/js/lib/tripledes.js"></script>
-<script src="/js/lib/jsencrypt.min.js"></script>
-<script src="/js/crypto.js"></script>
-<script src="/js/mod_profile.js"></script>
 <script language="JavaScript">
     ReactDOM.render(
         React.createElement(ProfileStatusWidget, {nick: '<?= $profile['nick'] ?>', hasOpenKey: '<?= $profile['has_open_key'] ?>'}, null),
