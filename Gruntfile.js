@@ -12,7 +12,9 @@ module.exports = function(grunt) {
                         'public/js/mod_profile.js',
                         'public/js/mod_profile.js.map',
                         'public/js/mod_lib.js',
-                        'public/js/mod_lib.js.map'
+                        'public/js/mod_lib.js.map',
+                        'public/js/mod_conversation.js',
+                        'public/js/mod_conversation.js.map'
                     ]
                 }]
             },
@@ -27,8 +29,9 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    '.tmp/mod_profile.js': ['assets/js/profile/*.js', 'assets/js/profile/widgets/*.js'],
+                    '.tmp/mod_profile.js': ['assets/js/profile/*.js', 'assets/js/profile/*/*.js'],
                     'public/js/mod_lib.js': ['assets/js/lib/*.js'],
+                    'public/js/mod_conversation.js': ['assets/js/conversation/*.js']
                 }
             },
         },
