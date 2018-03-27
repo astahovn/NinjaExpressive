@@ -4,28 +4,14 @@
 
 <?php $this->layout('layout::profile', ['title' => 'Conversation - Create']) ?>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">New Conversation</div>
-            <div class="panel-body">
-                <div class="hidden" id="active-user-open-key"><?= $activeUser->getOpenKey() ?></div>
-                <form id="conversation_create_form">
-                    <div class="form-group">
-                        <label for="theme">Theme</label>
-                        <input type="text" name="theme" id="theme" class="form-control" />
-                    </div>
-                    <div class="alert alert-danger hidden" id="theme-error"></div>
-                    <div class="form-group float-right">
-                        <button type="button" class="btn btn-primary" id="button_cancel">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="conversation-create-form"></div>
 
 <?php $this->start('javascript') ?>
 <script src="/js/mod_conversation.js"></script>
+<script language="JavaScript">
+    ReactDOM.render(
+        React.createElement(ConversationCreateForm, null, null),
+        document.getElementById('conversation-create-form')
+    );
+</script>
 <?php $this->stop() ?>
