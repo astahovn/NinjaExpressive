@@ -1,35 +1,24 @@
 <?php
 /** @var string $nick */
 /** @var string $open_key */
-/** @var array $errors */
 ?>
 
 <?php $this->layout('layout::profile', ['title' => 'Profile - Edit']) ?>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Profile</div>
-            <div class="panel-body">
-                <form action="/profile/edit" method="post" id="profile_edit_form">
-                    <div class="form-group">
-                        <label for="nick">Nick</label>
-                        <input type="text" name="nick" id="nick" class="form-control" placeholder="Nick" value="<?= $nick ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="openKey">Open key</label>
-                        <textarea name="open_key" id="openKey" rows="10" class="form-control"><?= $open_key ?></textarea>
-                    </div>
-                    <div class="alert alert-danger hidden" id="errors"></div>
-                    <?php if (count($errors) > 0): ?>
-                        <div class="alert alert-danger"><?= implode('<br />', $errors) ?></div>
-                    <?php endif; ?>
-                    <div class="form-group float-right">
-                        <button type="button" class="btn btn-primary" id="button_cancel">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="profile-edit-form"></div>
+
+<?php $this->start('javascript') ?>
+<script language="JavaScript">
+    ReactDOM.render(
+        React.createElement(
+            ProfileEditForm,
+            {
+                nick: '<?= $nick ?>',
+                open_key: <?= json_encode($open_key) ?>
+            },
+            null
+        ),
+        document.getElementById('profile-edit-form')
+    );
+</script>
+<?php $this->stop() ?>
