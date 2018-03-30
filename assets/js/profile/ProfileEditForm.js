@@ -4,7 +4,8 @@ class ProfileEditForm extends React.Component {
 
         this.state = {
             nick: this.props.nick,
-            open_key: this.props.open_key
+            open_key: this.props.open_key,
+            errors: ''
         };
 
         this.onChangeNick = this.onChangeNick.bind(this);
@@ -18,18 +19,16 @@ class ProfileEditForm extends React.Component {
 
     onCreate(event) {
         event.preventDefault();
-        let
-            $errors = $('#errors');
 
         // Get conversation theme
         if (!this.state.nick.trim()) {
-            $errors.html('The nick is empty').removeClass('hidden');
+            this.setState({errors: 'The nick is empty'});
             return;
         }
         // Encrypt check word with open key, for further checking
         let privateKeyCheck = ninjaCrypto.encryptRsa('private_key_check', this.state.open_key);
         if (!privateKeyCheck) {
-            $errors.html('The open key is wrong').removeClass('hidden');
+            this.setState({errors: 'The open key is wrong'});
             return;
         }
 
@@ -71,7 +70,7 @@ class ProfileEditForm extends React.Component {
                                     <label for="openKey">Open key</label>
                                     <textarea name="open_key" rows="10" className="form-control" value={this.state.open_key} onChange={this.onChangeOpenKey} />
                                 </div>
-                                <div className="alert alert-danger hidden" id="errors" />
+                                <div className={!!this.state.errors ? "alert alert-danger" : "alert alert-danger hidden"}>{this.state.errors}</div>
                                 <div className="form-group float-right">
                                     <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
                                     <button type="submit" className="btn btn-primary" onClick={this.onCreate}>Save</button>
