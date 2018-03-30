@@ -3,10 +3,12 @@ class ProfileEditForm extends React.Component {
         super(props);
 
         this.state = {
-            nick: this.props.nick
+            nick: this.props.nick,
+            open_key: this.props.open_key
         };
 
         this.onChangeNick = this.onChangeNick.bind(this);
+        this.onChangeOpenKey = this.onChangeOpenKey.bind(this);
         this.onCreate = this.onCreate.bind(this);
     }
 
@@ -17,7 +19,6 @@ class ProfileEditForm extends React.Component {
     onCreate(event) {
         event.preventDefault();
         let
-            $openKey = $('#openKey'),
             $errors = $('#errors');
 
         // Get conversation theme
@@ -26,7 +27,7 @@ class ProfileEditForm extends React.Component {
             return;
         }
         // Encrypt check word with open key, for further checking
-        let privateKeyCheck = ninjaCrypto.encryptRsa('private_key_check', $openKey.val());
+        let privateKeyCheck = ninjaCrypto.encryptRsa('private_key_check', this.state.open_key);
         if (!privateKeyCheck) {
             $errors.html('The open key is wrong').removeClass('hidden');
             return;
@@ -34,7 +35,7 @@ class ProfileEditForm extends React.Component {
 
         let actionData = {
             nick: this.state.nick,
-            open_key: $openKey.val(),
+            open_key: this.state.open_key,
             private_key_check: privateKeyCheck
         };
 
@@ -47,8 +48,11 @@ class ProfileEditForm extends React.Component {
     }
 
     onChangeNick(event) {
-        this.state.nick = event.target.value;
-        this.setState(this.state);
+        this.setState({nick: event.target.value});
+    }
+
+    onChangeOpenKey(event) {
+        this.setState({open_key: event.target.value});
     }
 
     render() {
@@ -65,7 +69,7 @@ class ProfileEditForm extends React.Component {
                                 </div>
                                 <div className="form-group">
                                     <label for="openKey">Open key</label>
-                                    <textarea name="open_key" id="openKey" rows="10" className="form-control">{this.props.open_key}</textarea>
+                                    <textarea name="open_key" rows="10" className="form-control" value={this.state.open_key} onChange={this.onChangeOpenKey} />
                                 </div>
                                 <div className="alert alert-danger hidden" id="errors" />
                                 <div className="form-group float-right">
