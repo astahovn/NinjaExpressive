@@ -1,14 +1,5 @@
 Application.modules.profileCommon = (function(self) {
     var
-        _addEvents = function() {
-            $(document)
-                .on('click', '#button_logout', function(event) {
-                    sessionStorage.clear();
-                    window.location.href = '/logout';
-                    event.preventDefault();
-                });
-        },
-
         _autoCheckPrivateKey = function() {
             var openKey = $('#active_user_open_key').html();
             if (!openKey) {
@@ -51,7 +42,6 @@ Application.modules.profileCommon = (function(self) {
     ;
 
     self.load = function() {
-        _addEvents();
         _autoCheckPrivateKey();
     };
 

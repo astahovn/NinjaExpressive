@@ -28,16 +28,7 @@
                     <img src="/zf-logo.png" alt="Zend Expressive" />
                 </a>
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav float-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= $activeUser->getUsername() ?> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" id="button_logout">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            <div class="collapse navbar-collapse" id="profile-top-menu"></div>
         </div>
     </nav>
 </header>
@@ -88,5 +79,11 @@
 <script src="/js/mod_profile.js"></script>
 <?=$this->section('javascript')?>
 <script src="/js/application.js"></script>
+<script language="JavaScript">
+    ReactDOM.render(
+        React.createElement(TopMenuWidget, {userName: '<?= $activeUser->getUsername() ?>'}, null),
+        document.getElementById('profile-top-menu')
+    );
+</script>
 </body>
 </html>
