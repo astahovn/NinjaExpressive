@@ -14,7 +14,7 @@ class ProfileStatusWidget extends React.Component {
         } else {
             PrivateKey = sessionStorage.getItem('private_key')
                 ? <span className="zf-green">Ok</span>
-                : <span><a className="red" href="/profile">Not selected</a></span>;
+                : <span><a className="red" href="/profile/private_key">Not selected</a></span>;
         }
 
         return [

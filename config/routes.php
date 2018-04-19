@@ -31,6 +31,7 @@ $app->route('/register', App\Action\Index\RegisterAction::class, ['GET', 'POST']
 
 $app->get('/profile', App\Action\Profile\IndexAction::class, 'home');
 $app->route('/profile/edit', App\Action\Profile\EditAction::class, ['GET', 'POST'], 'profile.edit');
+$app->route('/profile/private_key', App\Action\Profile\PrivateKeyAction::class, ['GET'], 'profile.private_key');
 
 $app->route('/conversation/create', App\Action\Conversation\CreateAction::class, ['GET', 'POST'], 'conversation.create');
 $app->get('/conversation/chat/{id:\d+}', App\Action\Conversation\ChatAction::class, 'conversation.chat');

@@ -51,6 +51,7 @@ class ConfigProvider
 
                 Action\Profile\IndexAction::class => BaseFactory::class,
                 Action\Profile\EditAction::class => BaseFactory::class,
+                Action\Profile\PrivateKeyAction::class => BaseFactory::class,
 
                 Action\Conversation\CreateAction::class => BaseFactory::class,
                 Action\Conversation\ChatAction::class => BaseFactory::class,

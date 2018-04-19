@@ -50,25 +50,7 @@
     </div>
 </footer>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="private_selector">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Please, select private key file</h4>
-            </div>
-            <div class="modal-body">
-                <input type="file" id="private_selector_file_input"><br />
-                <div id="private_selector_error" class="red"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="hidden" id="active_user_open_key"><?= $activeUser->getOpenKey() ?></div>
-<div class="hidden" id="active_user_private_key_check"><?= $activeUser->getPrivateKeyCheck() ?></div>
 
 <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>

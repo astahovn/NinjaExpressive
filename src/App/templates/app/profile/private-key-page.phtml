@@ -1,0 +1,22 @@
+<?php
+/** @var App\Entity\User $activeUser */
+?>
+
+<?php $this->layout('layout::profile', ['title' => 'Profile - Private key']) ?>
+
+<div id="profile-private-key-form"></div>
+
+<?php $this->start('javascript') ?>
+<script language="JavaScript">
+    ReactDOM.render(
+        React.createElement(
+            ProfilePrivateKeyForm,
+            {
+                user_private_key_check: <?= json_encode($activeUser->getPrivateKeyCheck()) ?>
+            },
+            null
+        ),
+        document.getElementById('profile-private-key-form')
+    );
+</script>
+<?php $this->stop() ?>
