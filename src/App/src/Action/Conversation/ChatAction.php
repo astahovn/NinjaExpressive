@@ -28,6 +28,7 @@ class ChatAction extends BaseAction implements ServerMiddlewareInterface
         $conversation = $this->mConversation->findById($conversationId);
         $tplData = [
             'theme' => $conversation->getTheme(),
+            'key' => $this->mConversation->findUserKey($conversationId, $this->activeUser->getId()),
         ];
         return new HtmlResponse($this->template->render('app-conversation::view-page', $tplData));
     }

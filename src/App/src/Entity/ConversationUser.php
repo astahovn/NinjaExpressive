@@ -20,6 +20,12 @@ class ConversationUser
     protected $id;
 
     /**
+     * @ORM\Column(name="conversation_id", type="integer")
+     * @var int
+     */
+    protected $conversation_id;
+
+    /**
      * @ORM\Column(name="user_id", type="integer")
      * @var int
      */

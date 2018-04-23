@@ -71,4 +71,17 @@ class Conversation extends Model
         return $entity;
     }
 
+    /**
+     * Find user's conversation key
+     * @param int $conversationId
+     * @param int $userId
+     * @return string
+     */
+    public function findUserKey($conversationId, $userId)
+    {
+        /** @var ConversationUser $entity */
+        $entity = $this->repUsers->findBy(['conversation_id' => $conversationId, 'user_id' => $userId]);
+        return $entity[0]->getKey();
+    }
+
 }

@@ -1,13 +1,25 @@
 <?php
-/** @var App\Entity\User $activeUser */
+/** @var string $theme */
+/** @var string $key */
 ?>
 
 <?php $this->layout('layout::profile', ['title' => 'Conversation']) ?>
 
-<div class="row">
-    <div class="col-sm-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Conversation <?= $theme ?></div>
-        </div>
-    </div>
-</div>
+<div id="profile-view-form"></div>
+
+<?php $this->start('javascript') ?>
+<script src="/js/mod_conversation.js"></script>
+<script language="JavaScript">
+    ReactDOM.render(
+        React.createElement(
+            ConversationViewForm,
+            {
+                conversation_key: <?= json_encode($key) ?>,
+                theme: '<?= $theme ?>'
+            },
+            null
+        ),
+        document.getElementById('profile-view-form')
+    );
+</script>
+<?php $this->stop() ?>
