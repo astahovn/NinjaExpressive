@@ -50,8 +50,10 @@ class ProfilePrivateKeyForm extends React.Component {
                                 <input type="file" id="private_selector_file_input" onChange={this.onFileChange}/><br />
                                 <div className="red">{this.state.error}</div>
                             </div>
-                            <div className="form-group float-right">
-                                <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
+                            <div className="btn-toolbar" role="toolbar">
+                                <div className="btn-group float-right" role="group">
+                                    <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>

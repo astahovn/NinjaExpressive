@@ -71,9 +71,13 @@ class ProfileEditForm extends React.Component {
                                     <textarea name="open_key" rows="10" className="form-control" value={this.state.open_key} onChange={this.onChangeOpenKey} />
                                 </div>
                                 <div className={!!this.state.errors ? "alert alert-danger" : "alert alert-danger hidden"}>{this.state.errors}</div>
-                                <div className="form-group float-right">
-                                    <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
-                                    <button type="submit" className="btn btn-primary" onClick={this.onCreate}>Save</button>
+                                <div className="btn-toolbar" role="toolbar">
+                                    <div className="btn-group float-right" role="group">
+                                        <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
+                                    </div>
+                                    <div className="btn-group float-right" role="group">
+                                        <button type="submit" className="btn btn-primary" onClick={this.onCreate}>Save</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

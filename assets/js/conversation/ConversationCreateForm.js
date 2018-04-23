@@ -58,9 +58,13 @@ class ConversationCreateForm extends React.Component {
                                     <input type="text" className="form-control" value={this.state.theme} onChange={this.onChangeTheme} />
                                 </div>
                                 <div className={!!this.state.error ? "alert alert-danger" : "alert alert-danger hidden"}>{this.state.error}</div>
-                                <div className="form-group float-right">
-                                    <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
-                                    <button type="submit" className="btn btn-primary" onClick={this.onCreate}>Create</button>
+                                <div className="btn-toolbar" role="toolbar">
+                                    <div className="btn-group float-right" role="group">
+                                        <button type="button" className="btn btn-primary" onClick={this.onCancel}>Cancel</button>
+                                    </div>
+                                    <div className="btn-group float-right" role="group">
+                                        <button type="submit" className="btn btn-primary" onClick={this.onCreate}>Create</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
